@@ -2,7 +2,11 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
+
 const app = express();
+
+//Body parser
+app.use(express.json());
 
 // connect to database
 connectDB();
