@@ -19,7 +19,7 @@ const EmployeeSchema = new mongoose.Schema({
     },
     dateOfBirth:{
         type: Date,
-        required:true
+       default:Date.now
     }
 });
 

@@ -1,8 +1,8 @@
 const Employee = require('../models/Employee');
 
-// Get all employees
+         // GET ALL EMPLOYEES
 
-exports.getEmployess = async(res,req,next) => {
+exports.getEmployees = async(req,res,next) => {
     try {
 
         const employees =  await Employee.find();
@@ -20,41 +20,54 @@ exports.getEmployess = async(res,req,next) => {
     }
 };
 
-exports.getEmployee = async(res,req,next) => {
+    // GET SINGLE EMPLOYEE
+
+exports.getEmployee = async(req,res,next) => {
     try {
+
         const employee = await Employee.findById(req.params.id);
 
         res.status(200).json({
             success:true,
             data:employee
-        })
+        });
     }
 
     catch (err) {
+
         res.status(400).json({
             success:false
         });
     }
 };
 
-exports.createEmployees = async(res,req,next) =>{
-    try {
-        const employee = Employee.create(req.body);
+     // CREATE AN EMPLOYEE
 
-        res.status(200).json({
-            success:true,
-            data:employee
-        })
-    }
-     catch (err) {
-        res.status(400).json({
-            success:false
-        });
-    }
+exports.createEmployees = async(req,res,next) =>{
+        try {
+
+            const employee = await Employee.create(req.body);
+
+            res.status(201).json({
+                success:true,
+                data:employee
+            });
+        }
+        catch (err) {
+
+            res.status(400).json({
+                success:false
+            });
+        }
+
+
 };
 
-exports.updateEmployee = async(res,req,next) =>{
+     // UPDATE AN EMPLOYEE
+
+exports.updateEmployee = async(req,res,next) =>{
     try {
+
         const employee = await Employee.findByIdAndUpdate(req.params.id, req.body,{
             new:true,
             runValidators:true
@@ -68,17 +81,21 @@ exports.updateEmployee = async(res,req,next) =>{
         res.status(200).json({
             success:true,
             data:employee
-        })
+        });
     }
     catch (err) {
+
         res.status(400).json({
             success:false
         });
     }
 };
 
+    // DELETE AN EMPLOYEE
+
 exports.deleteEmployee = async(req,res,next) =>{
     try {
+
         const employee = await Employee.findByIdAndDelete(req.params.id);
 
         if(!employee){
@@ -92,6 +109,7 @@ exports.deleteEmployee = async(req,res,next) =>{
         });
     }
     catch (err) {
+
         res.status(400).json({
             success:false
         })
