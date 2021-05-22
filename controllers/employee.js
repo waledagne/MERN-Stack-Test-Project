@@ -7,10 +7,10 @@ exports.getEmployees = async(req,res,next) => {
 
         const employees =  await Employee.find();
 
-        res.status(200).json({
-            success:true,
-            data:employees
-        });
+        res.json(
+
+            employees
+        );
 
     }
      catch (err) {

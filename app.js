@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const employee = require('./routes/route');
 
@@ -8,6 +9,8 @@ const app = express();
 
 //BODY PARSER
 app.use(express.json());
+
+app.use(cors());
 
 // CONNECT DATABASE
    connectDB();
